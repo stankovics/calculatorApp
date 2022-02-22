@@ -1,0 +1,28 @@
+{
+  "name": "javascript-calculator",
+  "version": "1.0.0",
+  "description": "calculator app",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass src/sass/main.scss css/style.css -w",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stankovics/calculatorApp.git"
+  },
+  "author": "Stefan S",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stankovics/calculatorApp/issues"
+  },
+  "homepage": "https://github.com/stankovics/calculatorApp#readme",
+  "devDependencies": {
+    "parcel": "^2.3.2"
+  },
+  "dependencies": {
+    "core-js": "^3.21.1",
+    "node-sass": "^7.0.1",
+    "regenerator-runtime": "^0.13.9"
+  }
+}
