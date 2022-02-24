@@ -1,10 +1,14 @@
-const numberButtons = document.querySelectorAll('');
-const operationButtons = document.querySelectorAll('');
-const equalButton = document.querySelectorAll('');
-const deleteButton = document.querySelector('');
-const allClearButton = document.querySelector('');
-const previousOperandTextElement = document.querySelector('');
-const currentOperandTextElement = document.querySelector('');
+const numberButtons = document.querySelectorAll('[data-number]');
+const operationButtons = document.querySelectorAll('[data-operation]');
+const equalButton = document.querySelectorAll('[data-equal]');
+const deleteButton = document.querySelector('[data-delete]');
+const allClearButton = document.querySelector('[data-all-clear]');
+const previousOperandTextElement = document.querySelector(
+  '[data-previous-operand]'
+);
+const currentOperandTextElement = document.querySelector(
+  '[data-current-operand]'
+);
 
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
@@ -12,3 +16,7 @@ class Calculator {
     this.currentOperandTextElement = currentOperandTextElement;
   }
 }
+const calculator = new Calculator(
+  previousOperandTextElement,
+  currentOperandTextElement
+);
