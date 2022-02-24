@@ -1,0 +1,9 @@
+.btn {
+  cursor: pointer;
+  &__span {
+    grid-column: span 2;
+  }
+  &:hover {
+    background-color: rgba(255, 255, 255, .9);
+  }
+}
