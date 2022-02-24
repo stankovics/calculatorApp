@@ -21,7 +21,10 @@ body {
   background-color: rgba(0, 0, 0, 0.75); }
 
 .btn {
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: 2rem;
+  border: 1px solid white;
+  outline: none; }
   .btn__span {
     grid-column: span 2; }
   .btn:hover {
