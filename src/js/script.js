@@ -1,3 +1,4 @@
+const numberButtonsParent = document.querySelector('.calculator-grid');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
 const equalButton = document.querySelectorAll('[data-equal]');
@@ -35,9 +36,16 @@ const calculator = new Calculator(
   previousOperandTextElement,
   currentOperandTextElement
 );
-numberButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    calculator.appendNumber(button.innerText);
-    calculator.updateDisplay();
-  });
+//numberButtons.forEach(button => {
+//  button.addEventListener('click', () => {
+//    calculator.appendNumber(button.innerText);
+//    calculator.updateDisplay();
+//  });
+//});
+numberButtonsParent.addEventListener('click', function (e) {
+  const btn = e.target.closest('[data-number]');
+  const selectedNumber = btn.getAttribute('data-number');
+  console.log(selectedNumber);
+  calculator.appendNumber(selectedNumber);
+  calculator.updateDisplay();
 });
