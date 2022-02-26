@@ -28,14 +28,18 @@ class Calculator {
   }
   chooseOperation(operation) {
     if (this.currentOperand === ' ') return;
-    //if(this.previousOperand !== '') {
-    //  this.compute()
-    //}
     this.operation = operation;
-    // this.previousOperand = this.currentOperand;
-    // this.currentOperand = '';
+    this.previousOperand = this.currentOperand;
+    this.currentOperand = '';
+    if (this.previousOperand !== '') {
+      this.compute();
+    }
   }
-  compute() {}
+  compute() {
+    let computation;
+    const prev = parseFloat(this.previousOperand);
+    const current = parseFloat(this.currentOperand);
+  }
   updateDisplay() {
     this.currentOperandTextElement.innerText = this.currentOperand;
     if (this.operation != null) {
