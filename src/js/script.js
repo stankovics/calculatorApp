@@ -39,6 +39,23 @@ class Calculator {
     let computation;
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (this.operation) {
+      case '+':
+        computation = prev + current;
+        break;
+      case '-':
+        computation = prev - current;
+        break;
+      case '*':
+        computation = prev * current;
+        break;
+      case '÷':
+        computation = prev / current;
+        break;
+      default:
+        return;
+    }
   }
   updateDisplay() {
     this.currentOperandTextElement.innerText = this.currentOperand;
@@ -61,9 +78,7 @@ parentElement.addEventListener('click', function (e) {
   }
   if (e.target.closest('[data-operation]')) {
     const btnOperation = e.target.closest('[data-operation]');
-    console.log(btnOperation);
     const selectedOperation = btnOperation.getAttribute('data-operation');
-    console.log(selectedOperation);
     calculator.chooseOperation(selectedOperation);
     calculator.updateDisplay();
   }
