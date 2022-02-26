@@ -26,10 +26,21 @@ class Calculator {
   appendNumber(number) {
     this.currentOperand = number;
   }
-  chooseOperation(operation) {}
+  chooseOperation(operation) {
+    if (this.currentOperand === ' ') return;
+    //if(this.previousOperand !== '') {
+    //  this.compute()
+    //}
+    this.operation = operation;
+    // this.previousOperand = this.currentOperand;
+    // this.currentOperand = '';
+  }
   compute() {}
   updateDisplay() {
     this.currentOperandTextElement.innerText = this.currentOperand;
+    if (this.operation != null) {
+      this.previousOperandTextElement.innerText = this.operation;
+    }
   }
 }
 const calculator = new Calculator(
@@ -49,6 +60,8 @@ parentElement.addEventListener('click', function (e) {
     console.log(btnOperation);
     const selectedOperation = btnOperation.getAttribute('data-operation');
     console.log(selectedOperation);
+    calculator.chooseOperation(selectedOperation);
+    calculator.updateDisplay();
   }
 });
 //Separate logic for event delegation logic for operation
