@@ -1,7 +1,9 @@
+import 'core-js/stable';
+
 const parentElement = document.querySelector('.calculator-grid');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
-const equalButton = document.querySelectorAll('[data-equal]');
+const equalButton = document.querySelector('[data-equal]');
 const deleteButton = document.querySelector('[data-delete]');
 const allClearButton = document.querySelector('[data-all-clear]');
 const previousOperandTextElement = document.querySelector(
@@ -24,7 +26,8 @@ class Calculator {
   }
   delete() {}
   appendNumber(number) {
-    this.currentOperand = number;
+    if (number === '.' && this.currentOperand.includes('.')) return;
+    this.currentOperand = this.currentOperand.toString() + number.toString();
   }
   chooseOperation(operation) {
     if (this.currentOperand === ' ') return;
@@ -39,11 +42,55 @@ class Calculator {
     let computation;
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (this.operation) {
+      case '+':
+        computation = prev + current;
+        break;
+      case '-':
+        computation = prev - current;
+        break;
+      case '*':
+        computation = prev * current;
+        break;
+      case '÷':
+        computation = prev / current;
+        break;
+      default:
+        return;
+    }
+    this.currentOperand = computation;
+    this.operation = undefined;
+    this.previousOperand = '';
+  }
+  getDisplayNumber(number) {
+    const stringNumber = number.toString();
+    const integerDigits = parseFloat(stringNumber.split('.')[0]);
+    const decimalDigits = stringNumber.split('.')[1];
+    let integerDisplay;
+    if (isNaN(integerDigits)) {
+      integerDisplay = '';
+    } else {
+      integerDisplay = integerDigits.toLocaleString('en', {
+        maximumFractionDigits: 0,
+      });
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`;
+    } else {
+      return integerDisplay;
+    }
   }
   updateDisplay() {
-    this.currentOperandTextElement.innerText = this.currentOperand;
+    this.currentOperandTextElement.innerText = this.getDisplayNumber(
+      this.currentOperand
+    );
     if (this.operation != null) {
-      this.previousOperandTextElement.innerText = this.operation;
+      this.previousOperandTextElement.innerText = `${
+        (this, this.getDisplayNumber(this.previousOperand))
+      } ${this.operation}`;
+    } else {
+      this.previousOperandTextElement.innerText = '';
     }
   }
 }
@@ -61,9 +108,7 @@ parentElement.addEventListener('click', function (e) {
   }
   if (e.target.closest('[data-operation]')) {
     const btnOperation = e.target.closest('[data-operation]');
-    console.log(btnOperation);
     const selectedOperation = btnOperation.getAttribute('data-operation');
-    console.log(selectedOperation);
     calculator.chooseOperation(selectedOperation);
     calculator.updateDisplay();
   }
@@ -74,3 +119,7 @@ parentElement.addEventListener('click', function (e) {
 //  const selectedOperation = btn.getAttribute('data-operation');
 //  console.log(selectedOperation);
 //});
+equalButton.addEventListener('click', function () {
+  calculator.compute();
+  calculator.updateDisplay();
+});
