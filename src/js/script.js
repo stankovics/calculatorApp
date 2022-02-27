@@ -24,7 +24,9 @@ class Calculator {
     this.previousOperand = '';
     this.operation = undefined;
   }
-  delete() {}
+  delete() {
+    this.currentOperand = this.currentOperand.toString().slice(0, -1);
+  }
   appendNumber(number) {
     if (number === '.' && this.currentOperand.includes('.')) return;
     this.currentOperand = this.currentOperand.toString() + number.toString();
@@ -119,7 +121,15 @@ parentElement.addEventListener('click', function (e) {
 //  const selectedOperation = btn.getAttribute('data-operation');
 //  console.log(selectedOperation);
 //});
-equalButton.addEventListener('click', function () {
+equalButton.addEventListener('click', () => {
   calculator.compute();
+  calculator.updateDisplay();
+});
+allClearButton.addEventListener('click', () => {
+  calculator.clear();
+  calculator.updateDisplay();
+});
+deleteButton.addEventListener('click', () => {
+  calculator.delete();
   calculator.updateDisplay();
 });
