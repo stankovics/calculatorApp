@@ -1,3 +1,5 @@
+import 'core-js/stable';
+
 const parentElement = document.querySelector('.calculator-grid');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
@@ -24,7 +26,8 @@ class Calculator {
   }
   delete() {}
   appendNumber(number) {
-    this.currentOperand = number;
+    if (number === '.' && this.currentOperand.includes('.')) return;
+    this.currentOperand = this.currentOperand.toString() + number.toString();
   }
   chooseOperation(operation) {
     if (this.currentOperand === ' ') return;
@@ -56,11 +59,38 @@ class Calculator {
       default:
         return;
     }
+    this.currentOperand = computation;
+    this.operation = undefined;
+    this.previousOperand = '';
+  }
+  getDisplayNumber(number) {
+    const stringNumber = number.toString();
+    const integerDigits = parseFloat(stringNumber.split('.')[0]);
+    const decimalDigits = stringNumber.split('.')[1];
+    let integerDisplay;
+    if (isNaN(integerDigits)) {
+      integerDisplay = '';
+    } else {
+      integerDisplay = integerDigits.toLocaleString('en', {
+        maximumFractionDigits: 0,
+      });
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`;
+    } else {
+      return integerDisplay;
+    }
   }
   updateDisplay() {
-    this.currentOperandTextElement.innerText = this.currentOperand;
+    this.currentOperandTextElement.innerText = this.getDisplayNumber(
+      this.currentOperand
+    );
     if (this.operation != null) {
-      this.previousOperandTextElement.innerText = this.operation;
+      this.previousOperandTextElement.innerText = `${
+        (this, this.getDisplayNumber(this.previousOperand))
+      } ${this.operation}`;
+    } else {
+      this.previousOperandTextElement.innerText = '';
     }
   }
 }
