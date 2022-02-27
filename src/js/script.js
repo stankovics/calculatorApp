@@ -3,7 +3,7 @@ import 'core-js/stable';
 const parentElement = document.querySelector('.calculator-grid');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
-const equalButton = document.querySelectorAll('[data-equal]');
+const equalButton = document.querySelector('[data-equal]');
 const deleteButton = document.querySelector('[data-delete]');
 const allClearButton = document.querySelector('[data-all-clear]');
 const previousOperandTextElement = document.querySelector(
@@ -119,3 +119,7 @@ parentElement.addEventListener('click', function (e) {
 //  const selectedOperation = btn.getAttribute('data-operation');
 //  console.log(selectedOperation);
 //});
+equalButton.addEventListener('click', function () {
+  calculator.compute();
+  calculator.updateDisplay();
+});
