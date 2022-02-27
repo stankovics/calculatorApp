@@ -119,7 +119,11 @@ parentElement.addEventListener('click', function (e) {
 //  const selectedOperation = btn.getAttribute('data-operation');
 //  console.log(selectedOperation);
 //});
-equalButton.addEventListener('click', function () {
+equalButton.addEventListener('click', () => {
   calculator.compute();
+  calculator.updateDisplay();
+});
+allClearButton.addEventListener('click', () => {
+  calculator.clear();
   calculator.updateDisplay();
 });
