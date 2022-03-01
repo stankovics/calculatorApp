@@ -1,5 +1,4 @@
 import 'core-js/stable';
-
 const parentElement = document.querySelector('.calculator-grid');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
