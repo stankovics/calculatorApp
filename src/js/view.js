@@ -1,9 +1,9 @@
-const parentElement = document.querySelector('.calculator-grid');
+export const parentElement = document.querySelector('.calculator-grid');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
-const equalButton = document.querySelector('[data-equal]');
-const deleteButton = document.querySelector('[data-delete]');
-const allClearButton = document.querySelector('[data-all-clear]');
+export const equalButton = document.querySelector('[data-equal]');
+export const deleteButton = document.querySelector('[data-delete]');
+export const allClearButton = document.querySelector('[data-all-clear]');
 const previousOperandTextElement = document.querySelector(
   '[data-previous-operand]'
 );
